@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function redirectToKakao() {
+            // 使用您的 KakaoTalk ID (替换 YOUR_KAKAO_ID)
+            const kakaoID = "SVIP333";
+            const deepLink = `kakaolink://addfriend?public_id=SVIP333`;
+            
+            // 尝试直接唤起 KakaoTalk
+            window.location.href = deepLink;
+            
+            // 500ms 后检测是否跳转成功（未安装则跳应用商店）
+            setTimeout(() => {
+                // iOS 设备跳转 App Store
+                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    window.location.href = "https://apps.apple.com/kr/app/kakaotalk/id362057947";
+                } 
+                // Android 设备跳转 Google Play
+                else if (/Android/i.test(navigator.userAgent)) {
+                    window.location.href = "market://details?id=com.kakao.talk";
+                }
+                // 其他设备打开 KakaoTalk 官网
+                else {
+                    window.location.href = "https://www.kakaocorp.com/page/service/service/KakaoTalk";
+                }
+            }, 500);
+        }
+        
+        // 页面加载立即执行跳转
+        window.onload = redirectToKakao;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            background: #FFCD00; /* KakaoTalk 黄色 */
+            color: #3C1E1E; /* KakaoTalk 褐色 */
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>正在跳转到 KakaoTalk...</h2>
+        <p>稍后将自动添加好友到您的 KakaoTalk</p>
+        <p>若未自动跳转，请点击下方按钮：</p>
+        <a class="button" onclick="redirectToKakao()">立即跳转到 KakaoTalk</a>
+    </div>
+</body>
+</html>
